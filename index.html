@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AURA-IA | Prototipo de auditoría</title>
+
+<style>
+:root{
+    --azul:#102c4c;
+    --azul2:#174f7d;
+    --azul3:#2479aa;
+    --turquesa:#21a6a1;
+    --fondo:#eef5f9;
+    --blanco:#ffffff;
+    --gris:#5d6b78;
+    --amarillo:#f5c542;
+    --rojo:#b93b55;
+    --verde:#2e8b70;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:var(--fondo);
+    color:#263746;
+}
+
+header{
+    background:linear-gradient(120deg,var(--azul),var(--azul2));
+    color:white;
+    padding:24px 30px;
+}
+
+header h1{
+    margin:0;
+    font-size:36px;
+}
+
+header p{
+    margin:6px 0 0;
+    color:#d9edf7;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    min-height:calc(100vh - 105px);
+}
+
+nav{
+    background:#122f4e;
+    padding:24px 15px;
+    color:white;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+    margin:0 10px 25px;
+    color:#ffffff;
+}
+
+.logo span{
+    color:#62d4cf;
+}
+
+nav button{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:#dfeef7;
+    text-align:left;
+    padding:13px 14px;
+    margin-bottom:5px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+nav button:hover,
+nav button.activo{
+    background:#1f5c88;
+    color:white;
+}
+
+main{
+    padding:25px;
+}
+
+.pantalla{
+    display:none;
+}
+
+.pantalla.activa{
+    display:block;
+}
+
+h2{
+    color:var(--azul);
+    margin-top:0;
+}
+
+h3{
+    color:var(--azul2);
+}
+
+.grid-metricas{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+    margin-bottom:22px;
+}
+
+.tarjeta{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 4px 18px rgba(16,44,76,.08);
+}
+
+.metrica{
+    border-top:5px solid var(--turquesa);
+}
+
+.numero{
+    font-size:31px;
+    font-weight:bold;
+    color:var(--azul);
+}
+
+.etiqueta{
+    color:var(--gris);
+    font-size:14px;
+    margin-top:5px;
+}
+
+.estado{
+    color:var(--rojo);
+}
+
+.grid-principal{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:20px;
+}
+
+.aviso{
+    border-left:5px solid var(--amarillo);
+    background:#fff9dc;
+    padding:15px;
+    border-radius:8px;
+    margin:15px 0;
+}
+
+.legal{
+    background:#e8f2f6;
+    border-left:5px solid var(--azul3);
+    padding:14px;
+    border-radius:8px;
+    font-size:14px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th{
+    background:var(--azul);
+    color:white;
+    padding:11px;
+    text-align:left;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid #dde7ee;
+}
+
+tr:hover{
+    background:#f3f8fb;
+}
+
+.barras{
+    height:285px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    border-bottom:2px solid #9fb4c2;
+    margin-top:20px;
+    padding:0 15px;
+}
+
+.barra-grupo{
+    width:20%;
+    text-align:center;
+}
+
+.barra{
+    width:58%;
+    margin:auto;
+    border-radius:7px 7px 0 0;
+    background:linear-gradient(var(--turquesa),var(--azul3));
+    min-height:5px;
+    transition:.4s;
+}
+
+.barra.alerta{
+    background:linear-gradient(#f2c348,#d79b18);
+}
+
+.valor{
+    font-weight:bold;
+    color:var(--azul);
+    margin-bottom:6px;
+}
+
+.nombre{
+    font-size:13px;
+    margin-top:8px;
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    border:1px solid #bed0dc;
+    border-radius:7px;
+    margin:6px 0 14px;
+}
+
+button.accion{
+    background:var(--azul2);
+    color:white;
+    border:0;
+    padding:11px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button.secundario{
+    background:var(--turquesa);
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.resultado-alerta{
+    font-size:23px;
+    font-weight:bold;
+    padding:18px;
+    text-align:center;
+    border-radius:8px;
+    background:#fff1d0;
+    color:#9a6800;
+}
+
+.resultado-ok{
+    font-size:23px;
+    font-weight:bold;
+    padding:18px;
+    text-align:center;
+    border-radius:8px;
+    background:#e0f4eb;
+    color:#23745c;
+}
+
+.visual-medico{
+    background:linear-gradient(135deg,#132d46,#35627f);
+    height:230px;
+    position:relative;
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.torax{
+    position:relative;
+    width:170px;
+    height:185px;
+}
+
+.pulmon{
+    position:absolute;
+    width:68px;
+    height:145px;
+    top:18px;
+    background:rgba(223,242,249,.75);
+    border:2px solid rgba(255,255,255,.5);
+    border-radius:50% 50% 42% 42%;
+}
+
+.pulmon.izq{
+    left:10px;
+    transform:rotate(7deg);
+}
+
+.pulmon.der{
+    right:10px;
+    transform:rotate(-7deg);
+}
+
+.columna{
+    position:absolute;
+    width:9px;
+    height:165px;
+    background:rgba(255,255,255,.7);
+    left:81px;
+    top:8px;
+    border-radius:5px;
+}
+
+.roi{
+    position:absolute;
+    border:3px dashed var(--amarillo);
+    width:48px;
+    height:42px;
+    top:78px;
+    left:43px;
+}
+
+.leyenda-imagen{
+    font-size:12px;
+    color:#667b89;
+    margin-top:9px;
+    font-style:italic;
+}
+
+.coordenadas{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.codigo{
+    font-family:monospace;
+    background:#eef4f7;
+    padding:8px;
+    border-radius:5px;
+}
+
+.slider{
+    width:100%;
+}
+
+footer{
+    text-align:center;
+    color:#69808e;
+    padding:20px;
+    font-size:13px;
+}
+
+@media(max-width:900px){
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    nav{
+        display:flex;
+        overflow:auto;
+        padding:10px;
+    }
+
+    nav .logo{
+        display:none;
+    }
+
+    nav button{
+        min-width:145px;
+    }
+
+    .grid-metricas{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid-principal{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:560px){
+    .grid-metricas,.form-grid,.coordenadas{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>AURA-IA</h1>
+    <p>Auditoría de Equidad en Inteligencia Artificial Médica</p>
+</header>
+
+<div class="layout">
+
+<nav>
+    <div class="logo">AURA-<span>IA</span></div>
+
+    <button class="activo" onclick="mostrar('inicio',this)">
+        Inicio
+    </button>
+
+    <button onclick="mostrar('datos',this)">
+        Cargar datos
+    </button>
+
+    <button onclick="mostrar('manual',this)">
+        Captura manual
+    </button>
+
+    <button onclick="mostrar('resultados',this)">
+        Resultados
+    </button>
+
+    <button onclick="mostrar('grupos',this)">
+        Análisis por grupo
+    </button>
+
+    <button onclick="mostrar('imagenes',this)">
+        Imagen de prueba
+    </button>
+
+    <button onclick="mostrar('acerca',this)">
+        Acerca del prototipo
+    </button>
+</nav>
+
+<main>
+
+<!-- INICIO -->
+
+<section id="inicio" class="pantalla activa">
+
+<h2>Resumen de auditoría</h2>
+
+<div class="grid-metricas">
+
+<div class="tarjeta metrica">
+    <div class="numero">60</div>
+    <div class="etiqueta">Estudios simulados</div>
+</div>
+
+<div class="tarjeta metrica">
+    <div class="numero">120</div>
+    <div class="etiqueta">Análisis</div>
+</div>
+
+<div class="tarjeta metrica">
+    <div class="numero">4</div>
+    <div class="etiqueta">Grupos comparados</div>
+</div>
+
+<div class="tarjeta metrica">
+    <div id="estadoInicio" class="numero estado">
+        REVISAR
+    </div>
+    <div class="etiqueta">Estado de auditoría</div>
+</div>
+
+</div>
+
+<div class="grid-principal">
+
+<div class="tarjeta">
+
+<h3>FNR por subgrupo</h3>
+
+<p>
+FNR significa <strong>tasa de falsos negativos</strong>.
+</p>
+
+<div class="barras">
+
+<div class="barra-grupo">
+    <div class="valor">10 %</div>
+    <div class="barra" style="height:80px"></div>
+    <div class="nombre">Mujer<br>Urbana</div>
+</div>
+
+<div class="barra-grupo">
+    <div class="valor">25 %</div>
+    <div class="barra alerta" style="height:200px"></div>
+    <div class="nombre">Mujer<br>Rural</div>
+</div>
+
+<div class="barra-grupo">
+    <div class="valor">8 %</div>
+    <div class="barra" style="height:64px"></div>
+    <div class="nombre">Hombre<br>Urbano</div>
+</div>
+
+<div class="barra-grupo">
+    <div class="valor">18.2 %</div>
+    <div class="barra" style="height:146px"></div>
+    <div class="nombre">Hombre<br>Rural</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div>
+
+<div class="tarjeta">
+
+<h3>Resultado</h3>
+
+<p>
+Mayor FNR:
+<strong>25 %</strong>
+</p>
+
+<p>
+Menor FNR:
+<strong>8 %</strong>
+</p>
+
+<p>
+Diferencia máxima:
+<strong>17 puntos porcentuales</strong>
+</p>
+
+<div class="aviso">
+<strong>REVISAR</strong><br>
+La diferencia supera el umbral académico de
+10 puntos porcentuales.
+</div>
+
+</div>
+
+<div class="legal">
+<strong>Importante:</strong>
+los datos son simulados.
+Una alerta no demuestra por sí misma que exista
+discriminación o sesgo.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CARGAR DATOS -->
+
+<section id="datos" class="pantalla">
+
+<h2>Cargar datos</h2>
+
+<div class="tarjeta">
+
+<h3>Archivo CSV</h3>
+
+<p>
+<strong>CSV</strong> significa
+<strong>valores separados por comas</strong>.
+</p>
+
+<input type="file" id="archivoCSV" accept=".csv">
+
+<button class="accion" onclick="leerCSV()">
+Procesar archivo
+</button>
+
+<button class="accion secundario"
+onclick="descargarPlantilla()">
+Descargar plantilla CSV
+</button>
+
+<div id="mensajeCSV"></div>
+
+</div>
+
+</section>
+
+
+<!-- CAPTURA MANUAL -->
+
+<section id="manual" class="pantalla">
+
+<h2>Captura manual</h2>
+
+<div class="tarjeta">
+
+<div class="form-grid">
+
+<div>
+<label>Género</label>
+<select id="genero">
+<option>Mujer</option>
+<option>Hombre</option>
+</select>
+</div>
+
+<div>
+<label>Región</label>
+<select id="region">
+<option>Urbana</option>
+<option>Rural</option>
+</select>
+</div>
+
+<div>
+<label>Tipo de estudio</label>
+<select id="tipo">
+<option>Radiografía</option>
+<option>Tomografía</option>
+<option>Dermatoscopía</option>
+</select>
+</div>
+
+<div>
+<label>Calidad</label>
+<select id="calidad">
+<option>Alta</option>
+<option>Media</option>
+<option>Baja</option>
+</select>
+</div>
+
+<div>
+<label>Resultado real</label>
+<select id="real">
+<option value="1">Positivo</option>
+<option value="0">Negativo</option>
+</select>
+</div>
+
+<div>
+<label>Resultado de IA</label>
+<select id="prediccion">
+<option value="1">Positivo</option>
+<option value="0">Negativo</option>
+</select>
+</div>
+
+</div>
+
+<button class="accion" onclick="agregarRegistro()">
+Agregar registro
+</button>
+
+<p id="mensajeRegistro"></p>
+
+</div>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section id="resultados" class="pantalla">
+
+<h2>Resultados simulados</h2>
+
+<div class="tarjeta">
+
+<table>
+
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Positivos reales</th>
+<th>FN</th>
+<th>FNR</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr>
+<td>Mujer - Urbana</td>
+<td>10</td>
+<td>1</td>
+<td>10.0 %</td>
+</tr>
+
+<tr>
+<td>Mujer - Rural</td>
+<td>8</td>
+<td>2</td>
+<td>25.0 %</td>
+</tr>
+
+<tr>
+<td>Hombre - Urbano</td>
+<td>25</td>
+<td>2</td>
+<td>8.0 %</td>
+</tr>
+
+<tr>
+<td>Hombre - Rural</td>
+<td>11</td>
+<td>2</td>
+<td>18.2 %</td>
+</tr>
+
+</tbody>
+
+</table>
+
+<p>
+<strong>FN:</strong> falsos negativos.
+</p>
+
+<p>
+<strong>FNR:</strong> tasa de falsos negativos.
+</p>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>Umbral de alerta</h3>
+
+<input
+class="slider"
+type="range"
+min="0"
+max="30"
+value="10"
+id="umbral"
+oninput="actualizarUmbral()">
+
+<p>
+Umbral seleccionado:
+<strong id="valorUmbral">10</strong>
+puntos porcentuales.
+</p>
+
+<div id="resultadoUmbral"
+class="resultado-alerta">
+REVISAR
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GRUPOS -->
+
+<section id="grupos" class="pantalla">
+
+<h2>Análisis por grupo</h2>
+
+<div class="grid-metricas">
+
+<div class="tarjeta metrica">
+<div class="numero">25 %</div>
+<div class="etiqueta">Mayor FNR<br>Mujer - Rural</div>
+</div>
+
+<div class="tarjeta metrica">
+<div class="numero">8 %</div>
+<div class="etiqueta">Menor FNR<br>Hombre - Urbano</div>
+</div>
+
+<div class="tarjeta metrica">
+<div class="numero">17</div>
+<div class="etiqueta">Diferencia en puntos porcentuales</div>
+</div>
+
+<div class="tarjeta metrica">
+<div class="numero estado">REVISAR</div>
+<div class="etiqueta">Resultado</div>
+</div>
+
+</div>
+
+<div class="legal">
+
+<strong>Interpretación:</strong>
+
+la diferencia indica que el resultado debe revisarse.
+No constituye por sí sola evidencia de discriminación
+y no representa un resultado clínico.
+
+</div>
+
+</section>
+
+
+<!-- IMAGEN -->
+
+<section id="imagenes" class="pantalla">
+
+<h2>Imagen de prueba y geometría analítica</h2>
+
+<div class="grid-principal">
+
+<div class="tarjeta">
+
+<h3>Representación de radiografía de tórax</h3>
+
+<div class="visual-medico">
+
+<div class="torax">
+
+<div class="pulmon izq"></div>
+<div class="pulmon der"></div>
+<div class="columna"></div>
+<div class="roi"></div>
+
+</div>
+
+</div>
+
+<div class="leyenda-imagen">
+
+Imagen totalmente ilustrativa creada para este
+prototipo académico.
+No corresponde a una radiografía de un paciente real,
+no proviene de un expediente médico
+y no debe utilizarse para diagnóstico.
+
+</div>
+
+</div>
+
+
+<div class="tarjeta">
+
+<h3>Coordenadas de ejemplo</h3>
+
+<div class="coordenadas">
+
+<div>
+<strong>Punto A</strong>
+<div class="codigo">(2, 3)</div>
+</div>
+
+<div>
+<strong>Punto B</strong>
+<div class="codigo">(6, 6)</div>
+</div>
+
+<div>
+<strong>Distancia</strong>
+<div class="codigo">5 unidades</div>
+</div>
+
+<div>
+<strong>Punto medio</strong>
+<div class="codigo">(4, 4.5)</div>
+</div>
+
+</div>
+
+<p>
+Estas coordenadas son únicamente un ejemplo para
+explicar cómo la Geometría Analítica puede utilizarse
+para ubicar y medir una zona dentro de una imagen.
+</p>
+
+<p>
+<strong>No representan la ubicación de una lesión real.</strong>
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ACERCA -->
+
+<section id="acerca" class="pantalla">
+
+<h2>Acerca de AURA-IA</h2>
+
+<div class="tarjeta">
+
+<p>
+AURA-IA es un prototipo académico diseñado para
+demostrar cómo pueden compararse resultados simulados
+de inteligencia artificial entre distintos grupos.
+</p>
+
+<h3>Materias integradas</h3>
+
+<ul>
+<li>Física</li>
+<li>Matemáticas Discretas</li>
+<li>Cálculo Diferencial</li>
+<li>Geometría Analítica</li>
+<li>Programación</li>
+<li>Perspectiva de género e interseccionalidad</li>
+</ul>
+
+<h3>Límites</h3>
+
+<ul>
+<li>Utiliza datos ficticios.</li>
+<li>No procesa expedientes médicos reales.</li>
+<li>No diagnostica cáncer de pulmón.</li>
+<li>No diagnostica melanoma.</li>
+<li>No recomienda tratamientos.</li>
+<li>No sustituye la valoración de profesionales de la salud.</li>
+</ul>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+<footer>
+AURA-IA | Prototipo académico | Datos simulados
+</footer>
+
+
+<script>
+
+const diferencia = 17;
+
+function mostrar(id, boton){
+
+    document.querySelectorAll(".pantalla")
+    .forEach(p => p.classList.remove("activa"));
+
+    document.getElementById(id)
+    .classList.add("activa");
+
+    document.querySelectorAll("nav button")
+    .forEach(b => b.classList.remove("activo"));
+
+    boton.classList.add("activo");
+}
+
+
+function actualizarUmbral(){
+
+    const umbral =
+    Number(document.getElementById("umbral").value);
+
+    document.getElementById("valorUmbral")
+    .textContent = umbral;
+
+    const resultado =
+    document.getElementById("resultadoUmbral");
+
+    if(diferencia >= umbral){
+
+        resultado.textContent = "REVISAR";
+        resultado.className = "resultado-alerta";
+
+    }else{
+
+        resultado.textContent = "SIN ALERTA";
+        resultado.className = "resultado-ok";
+
+    }
+
+}
+
+
+function agregarRegistro(){
+
+    const genero =
+    document.getElementById("genero").value;
+
+    const region =
+    document.getElementById("region").value;
+
+    document.getElementById("mensajeRegistro")
+    .innerHTML =
+    "Registro de prueba agregado: <strong>"
+    + genero + " - " + region +
+    "</strong>.";
+
+}
+
+
+function descargarPlantilla(){
+
+    const csv =
+`genero,region,real,prediccion,calidad,tipo_estudio
+mujer,rural,1,0,media,radiografia
+hombre,urbana,0,0,alta,tomografia`;
+
+    const blob =
+    new Blob([csv],{type:"text/csv"});
+
+    const url =
+    URL.createObjectURL(blob);
+
+    const a =
+    document.createElement("a");
+
+    a.href = url;
+    a.download = "plantilla_aura.csv";
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+function leerCSV(){
+
+    const archivo =
+    document.getElementById("archivoCSV").files[0];
+
+    const mensaje =
+    document.getElementById("mensajeCSV");
+
+    if(!archivo){
+
+        mensaje.innerHTML =
+        "<div class='aviso'>Selecciona primero un archivo CSV.</div>";
+
+        return;
+    }
+
+    const lector =
+    new FileReader();
+
+    lector.onload = function(e){
+
+        const texto = e.target.result;
+
+        const filas =
+        texto.trim().split(/\\r?\\n/);
+
+        mensaje.innerHTML =
+        "<div class='legal'><strong>Archivo leído correctamente.</strong><br>"
+        + "Filas detectadas: "
+        + Math.max(filas.length - 1,0)
+        + ".<br>"
+        + "Esta demostración no envía el archivo a un servidor."
+        + "</div>";
+
+    };
+
+    lector.readAsText(archivo);
+
+}
+
+</script>
+
+</body>
+</html>
