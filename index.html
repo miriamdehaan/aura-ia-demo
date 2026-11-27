@@ -33,17 +33,23 @@ body{
     font-family:Arial, Helvetica, sans-serif;
     background:var(--fondo);
     color:#263746;
+    line-height:1.5;
 }
+
+/* ENCABEZADO */
 
 header{
     background:linear-gradient(120deg,var(--azul),var(--azul2));
     color:white;
-    padding:24px 30px;
+    padding:25px 30px;
+    text-align:center;
+    border-bottom:5px solid var(--turquesa);
 }
 
 header h1{
     margin:0;
-    font-size:36px;
+    font-size:40px;
+    letter-spacing:1px;
 }
 
 header p{
@@ -51,11 +57,23 @@ header p{
     color:#d9edf7;
 }
 
+header .autores{
+    margin-top:10px;
+    color:#8fe3df;
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:.3px;
+}
+
+/* ESTRUCTURA PRINCIPAL */
+
 .layout{
     display:grid;
     grid-template-columns:230px 1fr;
-    min-height:calc(100vh - 105px);
+    min-height:calc(100vh - 130px);
 }
+
+/* MENÚ */
 
 nav{
     background:#122f4e;
@@ -93,6 +111,8 @@ nav button.activo{
     color:white;
 }
 
+/* CONTENIDO */
+
 main{
     padding:25px;
 }
@@ -113,6 +133,8 @@ h2{
 h3{
     color:var(--azul2);
 }
+
+/* MÉTRICAS */
 
 .grid-metricas{
     display:grid;
@@ -148,11 +170,15 @@ h3{
     color:var(--rojo);
 }
 
+/* DISTRIBUCIÓN */
+
 .grid-principal{
     display:grid;
     grid-template-columns:1.4fr 1fr;
     gap:20px;
 }
+
+/* AVISOS */
 
 .aviso{
     border-left:5px solid var(--amarillo);
@@ -169,6 +195,8 @@ h3{
     border-radius:8px;
     font-size:14px;
 }
+
+/* TABLAS */
 
 table{
     width:100%;
@@ -191,6 +219,8 @@ td{
 tr:hover{
     background:#f3f8fb;
 }
+
+/* GRÁFICA */
 
 .barras{
     height:285px;
@@ -231,7 +261,10 @@ tr:hover{
     margin-top:8px;
 }
 
-input,select{
+/* FORMULARIOS */
+
+input,
+select{
     width:100%;
     padding:10px;
     border:1px solid #bed0dc;
@@ -247,6 +280,11 @@ button.accion{
     border-radius:7px;
     cursor:pointer;
     font-weight:bold;
+    margin-right:7px;
+}
+
+button.accion:hover{
+    background:var(--azul);
 }
 
 button.secundario{
@@ -258,6 +296,8 @@ button.secundario{
     grid-template-columns:repeat(2,1fr);
     gap:15px;
 }
+
+/* RESULTADOS */
 
 .resultado-alerta{
     font-size:23px;
@@ -278,6 +318,8 @@ button.secundario{
     background:#e0f4eb;
     color:#23745c;
 }
+
+/* IMAGEN ILUSTRATIVA */
 
 .visual-medico{
     background:linear-gradient(135deg,#132d46,#35627f);
@@ -338,9 +380,11 @@ button.secundario{
 .leyenda-imagen{
     font-size:12px;
     color:#667b89;
-    margin-top:9px;
+    margin-top:10px;
     font-style:italic;
 }
+
+/* GEOMETRÍA */
 
 .coordenadas{
     display:grid;
@@ -359,6 +403,8 @@ button.secundario{
     width:100%;
 }
 
+/* PIE */
+
 footer{
     text-align:center;
     color:#69808e;
@@ -366,7 +412,10 @@ footer{
     font-size:13px;
 }
 
+/* CELULAR */
+
 @media(max-width:900px){
+
     .layout{
         grid-template-columns:1fr;
     }
@@ -395,55 +444,90 @@ footer{
 }
 
 @media(max-width:560px){
-    .grid-metricas,.form-grid,.coordenadas{
+
+    .grid-metricas,
+    .form-grid,
+    .coordenadas{
         grid-template-columns:1fr;
     }
+
+    header h1{
+        font-size:32px;
+    }
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
+
     <h1>AURA-IA</h1>
-    <p>Auditoría de Equidad en Inteligencia Artificial Médica</p>
+
+    <p>
+        Auditoría de Equidad en Inteligencia Artificial Médica
+    </p>
+
+    <p class="autores">
+        By Miriam V. Dehaan León y Maria Flores León | IA 202
+    </p>
+
 </header>
+
 
 <div class="layout">
 
-<nav>
-    <div class="logo">AURA-<span>IA</span></div>
 
-    <button class="activo" onclick="mostrar('inicio',this)">
+<nav>
+
+    <div class="logo">
+        AURA-<span>IA</span>
+    </div>
+
+    <button class="activo"
+    onclick="mostrar('inicio',this)">
         Inicio
     </button>
 
-    <button onclick="mostrar('datos',this)">
+    <button
+    onclick="mostrar('datos',this)">
         Cargar datos
     </button>
 
-    <button onclick="mostrar('manual',this)">
+    <button
+    onclick="mostrar('manual',this)">
         Captura manual
     </button>
 
-    <button onclick="mostrar('resultados',this)">
+    <button
+    onclick="mostrar('resultados',this)">
         Resultados
     </button>
 
-    <button onclick="mostrar('grupos',this)">
+    <button
+    onclick="mostrar('grupos',this)">
         Análisis por grupo
     </button>
 
-    <button onclick="mostrar('imagenes',this)">
+    <button
+    onclick="mostrar('imagenes',this)">
         Imagen de prueba
     </button>
 
-    <button onclick="mostrar('acerca',this)">
+    <button
+    onclick="mostrar('acerca',this)">
         Acerca del prototipo
     </button>
+
 </nav>
 
+
 <main>
+
 
 <!-- INICIO -->
 
@@ -451,67 +535,155 @@ footer{
 
 <h2>Resumen de auditoría</h2>
 
+
 <div class="grid-metricas">
 
 <div class="tarjeta metrica">
-    <div class="numero">60</div>
-    <div class="etiqueta">Estudios simulados</div>
-</div>
 
-<div class="tarjeta metrica">
-    <div class="numero">120</div>
-    <div class="etiqueta">Análisis</div>
-</div>
-
-<div class="tarjeta metrica">
-    <div class="numero">4</div>
-    <div class="etiqueta">Grupos comparados</div>
-</div>
-
-<div class="tarjeta metrica">
-    <div id="estadoInicio" class="numero estado">
-        REVISAR
+    <div class="numero">
+        60
     </div>
-    <div class="etiqueta">Estado de auditoría</div>
+
+    <div class="etiqueta">
+        Estudios simulados
+    </div>
+
+</div>
+
+
+<div class="tarjeta metrica">
+
+    <div class="numero">
+        120
+    </div>
+
+    <div class="etiqueta">
+        Análisis
+    </div>
+
+</div>
+
+
+<div class="tarjeta metrica">
+
+    <div class="numero">
+        4
+    </div>
+
+    <div class="etiqueta">
+        Grupos comparados
+    </div>
+
+</div>
+
+
+<div class="tarjeta metrica">
+
+    <div id="estadoInicio"
+    class="numero estado">
+
+        REVISAR
+
+    </div>
+
+    <div class="etiqueta">
+        Estado de auditoría
+    </div>
+
 </div>
 
 </div>
+
 
 <div class="grid-principal">
 
+
 <div class="tarjeta">
 
-<h3>FNR por subgrupo</h3>
+<h3>
+Tasa de falsos negativos por subgrupo
+</h3>
 
 <p>
-FNR significa <strong>tasa de falsos negativos</strong>.
+<strong>FNR</strong> significa
+<strong>tasa de falsos negativos</strong>.
 </p>
+
 
 <div class="barras">
 
-<div class="barra-grupo">
-    <div class="valor">10 %</div>
-    <div class="barra" style="height:80px"></div>
-    <div class="nombre">Mujer<br>Urbana</div>
-</div>
 
 <div class="barra-grupo">
-    <div class="valor">25 %</div>
-    <div class="barra alerta" style="height:200px"></div>
-    <div class="nombre">Mujer<br>Rural</div>
+
+    <div class="valor">
+        10 %
+    </div>
+
+    <div class="barra"
+    style="height:80px">
+    </div>
+
+    <div class="nombre">
+        Mujer<br>
+        Urbana
+    </div>
+
 </div>
 
-<div class="barra-grupo">
-    <div class="valor">8 %</div>
-    <div class="barra" style="height:64px"></div>
-    <div class="nombre">Hombre<br>Urbano</div>
-</div>
 
 <div class="barra-grupo">
-    <div class="valor">18.2 %</div>
-    <div class="barra" style="height:146px"></div>
-    <div class="nombre">Hombre<br>Rural</div>
+
+    <div class="valor">
+        25 %
+    </div>
+
+    <div class="barra alerta"
+    style="height:200px">
+    </div>
+
+    <div class="nombre">
+        Mujer<br>
+        Rural
+    </div>
+
 </div>
+
+
+<div class="barra-grupo">
+
+    <div class="valor">
+        8 %
+    </div>
+
+    <div class="barra"
+    style="height:64px">
+    </div>
+
+    <div class="nombre">
+        Hombre<br>
+        Urbano
+    </div>
+
+</div>
+
+
+<div class="barra-grupo">
+
+    <div class="valor">
+        18.2 %
+    </div>
+
+    <div class="barra"
+    style="height:146px">
+    </div>
+
+    <div class="nombre">
+        Hombre<br>
+        Rural
+    </div>
+
+</div>
+
 
 </div>
 
@@ -520,9 +692,12 @@ FNR significa <strong>tasa de falsos negativos</strong>.
 
 <div>
 
+
 <div class="tarjeta">
 
-<h3>Resultado</h3>
+<h3>
+Resultado
+</h3>
 
 <p>
 Mayor FNR:
@@ -539,201 +714,448 @@ Diferencia máxima:
 <strong>17 puntos porcentuales</strong>
 </p>
 
+
 <div class="aviso">
-<strong>REVISAR</strong><br>
-La diferencia supera el umbral académico de
-10 puntos porcentuales.
+
+<strong>
+REVISAR
+</strong>
+
+<br>
+
+La diferencia supera el umbral académico
+de 10 puntos porcentuales.
+
 </div>
 
 </div>
+
 
 <div class="legal">
-<strong>Importante:</strong>
-los datos son simulados.
+
+<strong>
+Importante:
+</strong>
+
+los datos utilizados son simulados.
+
 Una alerta no demuestra por sí misma que exista
 discriminación o sesgo.
+
 </div>
+
 
 </div>
 
 </div>
 
 </section>
+
 
 
 <!-- CARGAR DATOS -->
 
 <section id="datos" class="pantalla">
 
-<h2>Cargar datos</h2>
+<h2>
+Cargar datos
+</h2>
+
 
 <div class="tarjeta">
 
-<h3>Archivo CSV</h3>
+<h3>
+Archivo CSV
+</h3>
 
 <p>
 <strong>CSV</strong> significa
 <strong>valores separados por comas</strong>.
 </p>
 
-<input type="file" id="archivoCSV" accept=".csv">
+<p>
+Este tipo de archivo permite organizar información
+en filas y columnas.
+</p>
 
-<button class="accion" onclick="leerCSV()">
+
+<input
+type="file"
+id="archivoCSV"
+accept=".csv">
+
+
+<button
+class="accion"
+onclick="leerCSV()">
+
 Procesar archivo
+
 </button>
 
-<button class="accion secundario"
+
+<button
+class="accion secundario"
 onclick="descargarPlantilla()">
+
 Descargar plantilla CSV
+
 </button>
 
-<div id="mensajeCSV"></div>
+
+<div id="mensajeCSV">
+</div>
+
+
+<div class="legal">
+
+El archivo se procesa únicamente en el navegador
+para esta demostración académica.
+
+No se deben utilizar datos personales,
+expedientes médicos ni información clínica real.
+
+</div>
 
 </div>
 
 </section>
+
 
 
 <!-- CAPTURA MANUAL -->
 
 <section id="manual" class="pantalla">
 
-<h2>Captura manual</h2>
+<h2>
+Captura manual
+</h2>
+
 
 <div class="tarjeta">
 
+
 <div class="form-grid">
 
+
 <div>
-<label>Género</label>
+
+<label>
+Género
+</label>
+
 <select id="genero">
-<option>Mujer</option>
-<option>Hombre</option>
+
+<option>
+Mujer
+</option>
+
+<option>
+Hombre
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>Región</label>
+
+<label>
+Región
+</label>
+
 <select id="region">
-<option>Urbana</option>
-<option>Rural</option>
+
+<option>
+Urbana
+</option>
+
+<option>
+Rural
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>Tipo de estudio</label>
+
+<label>
+Tipo de estudio
+</label>
+
 <select id="tipo">
-<option>Radiografía</option>
-<option>Tomografía</option>
-<option>Dermatoscopía</option>
+
+<option>
+Radiografía
+</option>
+
+<option>
+Tomografía
+</option>
+
+<option>
+Dermatoscopía
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>Calidad</label>
+
+<label>
+Calidad de imagen
+</label>
+
 <select id="calidad">
-<option>Alta</option>
-<option>Media</option>
-<option>Baja</option>
+
+<option>
+Alta
+</option>
+
+<option>
+Media
+</option>
+
+<option>
+Baja
+</option>
+
 </select>
+
 </div>
 
+
 <div>
-<label>Resultado real</label>
+
+<label>
+Resultado real
+</label>
+
 <select id="real">
-<option value="1">Positivo</option>
-<option value="0">Negativo</option>
+
+<option value="1">
+Positivo
+</option>
+
+<option value="0">
+Negativo
+</option>
+
 </select>
+
 </div>
+
 
 <div>
-<label>Resultado de IA</label>
+
+<label>
+Resultado de IA
+</label>
+
 <select id="prediccion">
-<option value="1">Positivo</option>
-<option value="0">Negativo</option>
+
+<option value="1">
+Positivo
+</option>
+
+<option value="0">
+Negativo
+</option>
+
 </select>
-</div>
 
 </div>
 
-<button class="accion" onclick="agregarRegistro()">
+
+</div>
+
+
+<button
+class="accion"
+onclick="agregarRegistro()">
+
 Agregar registro
+
 </button>
 
-<p id="mensajeRegistro"></p>
+
+<p id="mensajeRegistro">
+</p>
 
 </div>
 
 </section>
 
 
+
 <!-- RESULTADOS -->
 
-<section id="resultados" class="pantalla">
+<section id="resultados"
+class="pantalla">
 
-<h2>Resultados simulados</h2>
+<h2>
+Resultados simulados
+</h2>
+
 
 <div class="tarjeta">
 
 <table>
 
 <thead>
+
 <tr>
-<th>Grupo</th>
-<th>Positivos reales</th>
-<th>FN</th>
-<th>FNR</th>
+
+<th>
+Grupo
+</th>
+
+<th>
+Positivos reales
+</th>
+
+<th>
+FN
+</th>
+
+<th>
+FNR
+</th>
+
 </tr>
+
 </thead>
+
 
 <tbody>
 
-<tr>
-<td>Mujer - Urbana</td>
-<td>10</td>
-<td>1</td>
-<td>10.0 %</td>
-</tr>
 
 <tr>
-<td>Mujer - Rural</td>
-<td>8</td>
-<td>2</td>
-<td>25.0 %</td>
+
+<td>
+Mujer - Urbana
+</td>
+
+<td>
+10
+</td>
+
+<td>
+1
+</td>
+
+<td>
+10.0 %
+</td>
+
 </tr>
 
-<tr>
-<td>Hombre - Urbano</td>
-<td>25</td>
-<td>2</td>
-<td>8.0 %</td>
-</tr>
 
 <tr>
-<td>Hombre - Rural</td>
-<td>11</td>
-<td>2</td>
-<td>18.2 %</td>
+
+<td>
+Mujer - Rural
+</td>
+
+<td>
+8
+</td>
+
+<td>
+2
+</td>
+
+<td>
+25.0 %
+</td>
+
 </tr>
+
+
+<tr>
+
+<td>
+Hombre - Urbano
+</td>
+
+<td>
+25
+</td>
+
+<td>
+2
+</td>
+
+<td>
+8.0 %
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Hombre - Rural
+</td>
+
+<td>
+11
+</td>
+
+<td>
+2
+</td>
+
+<td>
+18.2 %
+</td>
+
+</tr>
+
 
 </tbody>
 
 </table>
 
-<p>
-<strong>FN:</strong> falsos negativos.
-</p>
 
 <p>
-<strong>FNR:</strong> tasa de falsos negativos.
+
+<strong>
+FN:
+</strong>
+
+falsos negativos.
+
+</p>
+
+
+<p>
+
+<strong>
+FNR:
+</strong>
+
+tasa de falsos negativos.
+
 </p>
 
 </div>
 
 
+
 <div class="tarjeta">
 
-<h3>Umbral de alerta</h3>
+
+<h3>
+Umbral de alerta
+</h3>
+
 
 <input
 class="slider"
@@ -744,183 +1166,409 @@ value="10"
 id="umbral"
 oninput="actualizarUmbral()">
 
+
 <p>
+
 Umbral seleccionado:
-<strong id="valorUmbral">10</strong>
+
+<strong id="valorUmbral">
+10
+</strong>
+
 puntos porcentuales.
+
 </p>
 
-<div id="resultadoUmbral"
+
+<div
+id="resultadoUmbral"
 class="resultado-alerta">
+
 REVISAR
+
 </div>
+
+
+<p>
+
+La diferencia máxima encontrada
+en los datos simulados es de
+
+<strong>
+17 puntos porcentuales.
+</strong>
+
+</p>
+
 
 </div>
 
 </section>
 
 
-<!-- GRUPOS -->
 
-<section id="grupos" class="pantalla">
+<!-- ANÁLISIS POR GRUPO -->
 
-<h2>Análisis por grupo</h2>
+<section id="grupos"
+class="pantalla">
+
+<h2>
+Análisis por grupo
+</h2>
+
 
 <div class="grid-metricas">
 
-<div class="tarjeta metrica">
-<div class="numero">25 %</div>
-<div class="etiqueta">Mayor FNR<br>Mujer - Rural</div>
-</div>
 
 <div class="tarjeta metrica">
-<div class="numero">8 %</div>
-<div class="etiqueta">Menor FNR<br>Hombre - Urbano</div>
+
+<div class="numero">
+25 %
 </div>
 
-<div class="tarjeta metrica">
-<div class="numero">17</div>
-<div class="etiqueta">Diferencia en puntos porcentuales</div>
-</div>
+<div class="etiqueta">
 
-<div class="tarjeta metrica">
-<div class="numero estado">REVISAR</div>
-<div class="etiqueta">Resultado</div>
+Mayor FNR
+
+<br>
+
+Mujer - Rural
+
 </div>
 
 </div>
+
+
+<div class="tarjeta metrica">
+
+<div class="numero">
+8 %
+</div>
+
+<div class="etiqueta">
+
+Menor FNR
+
+<br>
+
+Hombre - Urbano
+
+</div>
+
+</div>
+
+
+<div class="tarjeta metrica">
+
+<div class="numero">
+17
+</div>
+
+<div class="etiqueta">
+
+Diferencia en puntos porcentuales
+
+</div>
+
+</div>
+
+
+<div class="tarjeta metrica">
+
+<div class="numero estado">
+REVISAR
+</div>
+
+<div class="etiqueta">
+Resultado
+</div>
+
+</div>
+
+
+</div>
+
 
 <div class="legal">
 
-<strong>Interpretación:</strong>
+<strong>
+Interpretación:
+</strong>
 
-la diferencia indica que el resultado debe revisarse.
-No constituye por sí sola evidencia de discriminación
-y no representa un resultado clínico.
+la diferencia encontrada indica que el resultado
+debe revisarse.
+
+No constituye por sí sola evidencia de discriminación,
+no confirma un sesgo clínico y no representa un
+resultado médico.
 
 </div>
 
 </section>
 
 
-<!-- IMAGEN -->
 
-<section id="imagenes" class="pantalla">
+<!-- IMAGEN DE PRUEBA -->
 
-<h2>Imagen de prueba y geometría analítica</h2>
+<section id="imagenes"
+class="pantalla">
+
+<h2>
+Imagen de prueba y Geometría Analítica
+</h2>
+
 
 <div class="grid-principal">
 
+
 <div class="tarjeta">
 
-<h3>Representación de radiografía de tórax</h3>
+<h3>
+Representación ilustrativa de tórax
+</h3>
+
 
 <div class="visual-medico">
 
+
 <div class="torax">
 
-<div class="pulmon izq"></div>
-<div class="pulmon der"></div>
-<div class="columna"></div>
-<div class="roi"></div>
+
+<div class="pulmon izq">
+</div>
+
+
+<div class="pulmon der">
+</div>
+
+
+<div class="columna">
+</div>
+
+
+<div class="roi">
+</div>
+
 
 </div>
 
+
 </div>
+
 
 <div class="leyenda-imagen">
 
-Imagen totalmente ilustrativa creada para este
-prototipo académico.
-No corresponde a una radiografía de un paciente real,
-no proviene de un expediente médico
-y no debe utilizarse para diagnóstico.
+<strong>
+Imagen ilustrativa.
+</strong>
+
+No corresponde a una radiografía real,
+no pertenece a un paciente ni a un caso clínico.
+
+Fue creada exclusivamente para representar
+el funcionamiento académico del prototipo AURA-IA.
+
+No debe utilizarse para diagnóstico médico.
 
 </div>
 
+
 </div>
+
 
 
 <div class="tarjeta">
 
-<h3>Coordenadas de ejemplo</h3>
+
+<h3>
+Coordenadas de ejemplo
+</h3>
+
 
 <div class="coordenadas">
 
-<div>
-<strong>Punto A</strong>
-<div class="codigo">(2, 3)</div>
-</div>
 
 <div>
-<strong>Punto B</strong>
-<div class="codigo">(6, 6)</div>
-</div>
 
-<div>
-<strong>Distancia</strong>
-<div class="codigo">5 unidades</div>
-</div>
+<strong>
+Punto A
+</strong>
 
-<div>
-<strong>Punto medio</strong>
-<div class="codigo">(4, 4.5)</div>
+<div class="codigo">
+(2, 3)
 </div>
 
 </div>
+
+
+<div>
+
+<strong>
+Punto B
+</strong>
+
+<div class="codigo">
+(6, 6)
+</div>
+
+</div>
+
+
+<div>
+
+<strong>
+Distancia
+</strong>
+
+<div class="codigo">
+5 unidades
+</div>
+
+</div>
+
+
+<div>
+
+<strong>
+Punto medio
+</strong>
+
+<div class="codigo">
+(4, 4.5)
+</div>
+
+</div>
+
+
+</div>
+
 
 <p>
-Estas coordenadas son únicamente un ejemplo para
-explicar cómo la Geometría Analítica puede utilizarse
-para ubicar y medir una zona dentro de una imagen.
+
+Estas coordenadas son únicamente un ejemplo
+para explicar cómo la Geometría Analítica
+puede utilizarse para ubicar y medir una zona
+dentro de una imagen.
+
 </p>
 
+
 <p>
-<strong>No representan la ubicación de una lesión real.</strong>
+
+<strong>
+No representan la ubicación,
+dimensión o forma de una lesión real.
+</strong>
+
 </p>
+
 
 </div>
 
 </div>
 
 </section>
+
 
 
 <!-- ACERCA -->
 
-<section id="acerca" class="pantalla">
+<section id="acerca"
+class="pantalla">
 
-<h2>Acerca de AURA-IA</h2>
+<h2>
+Acerca de AURA-IA
+</h2>
+
 
 <div class="tarjeta">
 
+
 <p>
-AURA-IA es un prototipo académico diseñado para
-demostrar cómo pueden compararse resultados simulados
-de inteligencia artificial entre distintos grupos.
+
+AURA-IA es un prototipo académico diseñado
+para demostrar cómo pueden compararse resultados
+simulados de inteligencia artificial entre
+distintos grupos.
+
 </p>
 
-<h3>Materias integradas</h3>
+
+<h3>
+Materias integradas
+</h3>
+
 
 <ul>
-<li>Física</li>
-<li>Matemáticas Discretas</li>
-<li>Cálculo Diferencial</li>
-<li>Geometría Analítica</li>
-<li>Programación</li>
-<li>Perspectiva de género e interseccionalidad</li>
+
+<li>
+Física
+</li>
+
+<li>
+Matemáticas Discretas
+</li>
+
+<li>
+Cálculo Diferencial
+</li>
+
+<li>
+Geometría Analítica
+</li>
+
+<li>
+Programación
+</li>
+
+<li>
+Perspectiva de género e interseccionalidad
+</li>
+
 </ul>
 
-<h3>Límites</h3>
+
+<h3>
+Límites del prototipo
+</h3>
+
 
 <ul>
-<li>Utiliza datos ficticios.</li>
-<li>No procesa expedientes médicos reales.</li>
-<li>No diagnostica cáncer de pulmón.</li>
-<li>No diagnostica melanoma.</li>
-<li>No recomienda tratamientos.</li>
-<li>No sustituye la valoración de profesionales de la salud.</li>
+
+<li>
+Utiliza datos ficticios y simulados.
+</li>
+
+<li>
+Las imágenes mostradas son ilustrativas.
+</li>
+
+<li>
+No procesa expedientes médicos reales.
+</li>
+
+<li>
+No identifica cáncer de pulmón.
+</li>
+
+<li>
+No identifica melanoma.
+</li>
+
+<li>
+No realiza diagnósticos médicos.
+</li>
+
+<li>
+No recomienda tratamientos.
+</li>
+
+<li>
+No sustituye la valoración de profesionales de la salud.
+</li>
+
 </ul>
+
 
 </div>
 
@@ -932,139 +1580,299 @@ de inteligencia artificial entre distintos grupos.
 </div>
 
 
+
 <footer>
-AURA-IA | Prototipo académico | Datos simulados
+
+<strong>
+AURA-IA
+</strong>
+
+|
+
+By Miriam V. Dehaan León y Maria Flores León
+
+|
+
+IA 202
+
+<br>
+
+Prototipo académico con datos simulados
+
 </footer>
+
 
 
 <script>
 
+
 const diferencia = 17;
+
+
+/* CAMBIAR PANTALLAS */
 
 function mostrar(id, boton){
 
-    document.querySelectorAll(".pantalla")
-    .forEach(p => p.classList.remove("activa"));
+    document
+    .querySelectorAll(".pantalla")
+    .forEach(function(p){
 
-    document.getElementById(id)
+        p.classList.remove("activa");
+
+    });
+
+
+    document
+    .getElementById(id)
     .classList.add("activa");
 
-    document.querySelectorAll("nav button")
-    .forEach(b => b.classList.remove("activo"));
+
+    document
+    .querySelectorAll("nav button")
+    .forEach(function(b){
+
+        b.classList.remove("activo");
+
+    });
+
 
     boton.classList.add("activo");
+
 }
 
+
+/* UMBRAL */
 
 function actualizarUmbral(){
 
     const umbral =
-    Number(document.getElementById("umbral").value);
+    Number(
+        document
+        .getElementById("umbral")
+        .value
+    );
 
-    document.getElementById("valorUmbral")
+
+    document
+    .getElementById("valorUmbral")
     .textContent = umbral;
 
+
     const resultado =
-    document.getElementById("resultadoUmbral");
+    document
+    .getElementById("resultadoUmbral");
+
 
     if(diferencia >= umbral){
 
-        resultado.textContent = "REVISAR";
-        resultado.className = "resultado-alerta";
+        resultado.textContent =
+        "REVISAR";
 
-    }else{
+        resultado.className =
+        "resultado-alerta";
 
-        resultado.textContent = "SIN ALERTA";
-        resultado.className = "resultado-ok";
+    }
+
+    else{
+
+        resultado.textContent =
+        "SIN ALERTA";
+
+        resultado.className =
+        "resultado-ok";
 
     }
 
 }
 
 
+/* CAPTURA MANUAL */
+
 function agregarRegistro(){
 
     const genero =
-    document.getElementById("genero").value;
+    document
+    .getElementById("genero")
+    .value;
+
 
     const region =
-    document.getElementById("region").value;
+    document
+    .getElementById("region")
+    .value;
 
-    document.getElementById("mensajeRegistro")
+
+    const tipo =
+    document
+    .getElementById("tipo")
+    .value;
+
+
+    const calidad =
+    document
+    .getElementById("calidad")
+    .value;
+
+
+    document
+    .getElementById("mensajeRegistro")
     .innerHTML =
-    "Registro de prueba agregado: <strong>"
-    + genero + " - " + region +
-    "</strong>.";
+
+    "<div class='legal'>" +
+
+    "<strong>Registro de prueba agregado.</strong><br>" +
+
+    "Grupo: " +
+    genero +
+    " - " +
+    region +
+
+    "<br>Tipo de estudio: " +
+    tipo +
+
+    "<br>Calidad: " +
+    calidad +
+
+    "<br><br>" +
+
+    "Este registro forma parte únicamente " +
+    "de la demostración académica." +
+
+    "</div>";
 
 }
 
 
+/* DESCARGAR PLANTILLA */
+
 function descargarPlantilla(){
 
     const csv =
+
 `genero,region,real,prediccion,calidad,tipo_estudio
 mujer,rural,1,0,media,radiografia
-hombre,urbana,0,0,alta,tomografia`;
+hombre,urbana,0,0,alta,tomografia
+mujer,urbana,1,1,alta,dermatoscopia
+hombre,rural,1,0,baja,radiografia`;
+
 
     const blob =
-    new Blob([csv],{type:"text/csv"});
+    new Blob(
+        [csv],
+        {
+            type:"text/csv"
+        }
+    );
+
 
     const url =
     URL.createObjectURL(blob);
 
+
     const a =
     document.createElement("a");
 
+
     a.href = url;
-    a.download = "plantilla_aura.csv";
+
+    a.download =
+    "plantilla_aura.csv";
+
+
     a.click();
+
 
     URL.revokeObjectURL(url);
 
 }
 
 
+/* LEER CSV */
+
 function leerCSV(){
 
     const archivo =
-    document.getElementById("archivoCSV").files[0];
+    document
+    .getElementById("archivoCSV")
+    .files[0];
+
 
     const mensaje =
-    document.getElementById("mensajeCSV");
+    document
+    .getElementById("mensajeCSV");
+
 
     if(!archivo){
 
         mensaje.innerHTML =
-        "<div class='aviso'>Selecciona primero un archivo CSV.</div>";
+
+        "<div class='aviso'>" +
+
+        "Selecciona primero un archivo CSV." +
+
+        "</div>";
 
         return;
+
     }
+
 
     const lector =
     new FileReader();
 
-    lector.onload = function(e){
 
-        const texto = e.target.result;
+    lector.onload =
+    function(e){
+
+
+        const texto =
+        e.target.result;
+
 
         const filas =
-        texto.trim().split(/\\r?\\n/);
+        texto
+        .trim()
+        .split(/\r?\n/);
+
 
         mensaje.innerHTML =
-        "<div class='legal'><strong>Archivo leído correctamente.</strong><br>"
-        + "Filas detectadas: "
-        + Math.max(filas.length - 1,0)
-        + ".<br>"
-        + "Esta demostración no envía el archivo a un servidor."
-        + "</div>";
+
+        "<div class='legal'>" +
+
+        "<strong>Archivo leído correctamente.</strong><br>" +
+
+        "Filas detectadas: " +
+
+        Math.max(
+            filas.length - 1,
+            0
+        ) +
+
+        ".<br><br>" +
+
+        "Esta demostración procesa el archivo " +
+
+        "únicamente en el navegador." +
+
+        "<br>" +
+
+        "No se envían los datos a un servidor." +
+
+        "</div>";
 
     };
 
-    lector.readAsText(archivo);
+
+    lector.readAsText(
+        archivo
+    );
 
 }
 
+
 </script>
 
+
 </body>
+
 </html>
